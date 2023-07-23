@@ -8,6 +8,7 @@ use App\Models\Product;
 
 class ProductService 
 {
+    // change
     public function getProducts(){
         $products = Product::all();
         foreach($products as $product){
