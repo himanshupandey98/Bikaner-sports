@@ -32,8 +32,9 @@ class HomeController extends Controller
         }
 
         $productService = new ProductService();
-        $trendy_products = $productService->getProducts();
-
-        return view('home',['brands'=>$brands,'trendy_products'=>$trendy_products]);
+        $trendy_products = $productService->getProductVariants();
+        $shopByCategory = $productService->shopByCategory();
+        
+        return view('home',['brands'=>$brands,'trendy_products'=>collect($trendy_products),'shopByCategory'=>collect($shopByCategory)]);
     }
 }

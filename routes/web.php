@@ -5,8 +5,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\productImageController;
 use App\Http\Controllers\SportsCategoryController;
 use App\Http\Controllers\ProductAttributeController;
+use App\Http\Controllers\ProductVariantController;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/admin', function () {
@@ -62,3 +64,20 @@ Route::post('product/store', [ProductController::class,'store'])->name('product.
 Route::get('product/edit/{id}', [ProductController::class,'edit'])->name('product.edit');
 Route::post('product/update/{id}', [ProductController::class,'update'])->name('product.update');
 Route::get('product/destroy/{id}', [ProductController::class,'destroy'])->name('product.destroy');
+
+
+
+Route::get('product-image/index/{product_id}', [productImageController::class,'index'])->name('product-image.index');
+Route::get('product-image/create/{product_id}', [productImageController::class,'create'])->name('product-image.create');
+Route::post('product-image/store', [productImageController::class,'store'])->name('product-image.store');
+Route::get('product-image/destroy/{id}', [productImageController::class,'destroy'])->name('product-image.destroy');
+
+
+
+Route::get('product-variant/index/{product_id}', [ProductVariantController::class,'index'])->name('product-variant.index');
+Route::get('product-variant/create/{product_id}', [ProductVariantController::class,'create'])->name('product-variant.create');
+Route::post('product-variant/store', [ProductVariantController::class,'store'])->name('product-variant.store');
+Route::get('product-variant/edit/{id}', [ProductVariantController::class,'edit'])->name('product-variant.edit');
+Route::post('product-variant/update/{id}', [ProductVariantController::class,'update'])->name('product-variant.update');
+Route::get('product-variant/destroy/{id}', [ProductVariantController::class,'destroy'])->name('product-variant.destroy');
+

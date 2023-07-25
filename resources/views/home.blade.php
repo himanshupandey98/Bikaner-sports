@@ -1,5 +1,9 @@
 <x-layout>
-   <home-component :brands="{{ $brands }}" :trendy_products="{{ $trendy_products }}"></home-component>
+  
+   
+
+   <home-component :brands="{{ $brands }}" :trendy="{{ $trendy_products }}" :category="{{ $shopByCategory }}"></home-component>
+
 </x-layout>
 
 

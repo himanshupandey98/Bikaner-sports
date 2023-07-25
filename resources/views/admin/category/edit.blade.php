@@ -12,7 +12,7 @@
                 <!--begin::Card-->
                 <div class="card w-50 ">
                     <!--begin::Card header-->
-                    <div class="card-header border-0 pt-6">
+                    <div class="card-header border-0 pt-6 d-block">
                         <!--begin::Card title-->
                         <div class="card-title">
                             <!--begin::Search-->
@@ -24,6 +24,7 @@
                         </div>
                         <!--begin::Card title-->
                         <!--begin::Card toolbar-->
+                         <x-validationError></x-validationError>
 
                         <!--end::Card toolbar-->
                     </div>
@@ -35,6 +36,10 @@
                             <div class="form-group mb-3">
                                 <label for="" class="form-label">Category Name</label>
                                 <input type="text" name="name" class="form-control" placeholder="category Name" value="{{ $category->name }}">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="" class="form-label">Category Image</label>
+                                <input type="file" name="image" class="form-control">
                             </div>
                             
                             <div class="form-group mb-3">

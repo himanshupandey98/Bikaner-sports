@@ -193,11 +193,12 @@
                                     }
                                 }
                             }'>
-                        <div class="product product-11 text-center">
+
+                        <div class="product product-11 text-center " v-for="item in trendy" :key="item.id">
                             <figure class="product-media">
                                 <a href="product.html">
-                                    <img src="assets/images/demos/demo-2/products/product-1-1.jpg" alt="Product image" class="product-image">
-                                    <img src="assets/images/demos/demo-2/products/product-1-2.jpg" alt="Product image" class="product-image-hover">
+                                    <img :src="item.image" alt="Product image" class="product-image">
+                                    <img :src="item.thumbnail" alt="Product image" class="product-image-hover">
                                 </a>
 
                                 <div class="product-action-vertical">
@@ -206,32 +207,9 @@
                             </figure><!-- End .product-media -->
 
                             <div class="product-body">
-                                <h3 class="product-title"><a href="product.html">Butler Stool Ladder</a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a href="product.html">{{item.sku}}</a></h3><!-- End .product-title -->
                                 <div class="product-price">
-                                    $251,00
-                                </div><!-- End .product-price -->
-                            </div><!-- End .product-body -->
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                            </div><!-- End .product-action -->
-                        </div><!-- End .product -->
-
-                        <div class="product product-11 text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="assets/images/demos/demo-2/products/product-2-1.jpg" alt="Product image" class="product-image">
-                                    <img src="assets/images/demos/demo-2/products/product-2-2.jpg" alt="Product image" class="product-image-hover">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist"><span>add to wishlist</span></a>
-                                </div><!-- End .product-action-vertical -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <h3 class="product-title"><a href="product.html">Octo 4240</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    $746,00
+                                    {{ item.price }}
                                 </div><!-- End .product-price -->
 
                                 <div class="product-nav product-nav-dots">
@@ -647,7 +625,7 @@
                             <a href="#" class="btn btn-outline-white banner-link">Shop Now<i class="icon-long-arrow-right"></i></a>
                         </div><!-- End .banner-content -->
                     </div><!-- End .banner -->
-                </div><!-- End .col-sm-6 col-lg-3 -->
+                </div>
                 <div class="col-sm-12 col-lg-4 banners-sm">
                     <div class="row">
                         <div class="banner banner-display banner-link-anim col-lg-12 col-6">
@@ -672,7 +650,7 @@
                             </div><!-- End .banner-content -->
                         </div><!-- End .banner -->
                     </div>
-                </div><!-- End .col-sm-6 col-lg-3 -->
+                </div>
             </div><!-- End .row -->
         </div><!-- End .container -->
 
@@ -721,10 +699,10 @@
                                             $229,00
                                         </div><!-- End .product-price -->
 
-                                        <div class="product-nav product-nav-dots">
+                                        <!-- <div class="product-nav product-nav-dots">
                                             <a href="#" class="active" style="background: #333333;"><span class="sr-only">Color name</span></a>
                                             <a href="#" style="background: #e8e8e8;"><span class="sr-only">Color name</span></a>
-                                        </div><!-- End .product-nav -->
+                                        </div> -->
                                     </div><!-- End .product-body -->
                                     <div class="product-action">
                                         <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
@@ -1173,7 +1151,7 @@
                         </div><!-- End .row -->
                     </div><!-- End .products -->
                 </div><!-- .End .tab-pane -->
-            </div><!-- End .tab-content -->
+            </div>
             <div class="more-container text-center">
                 <a href="#" class="btn btn-outline-darker btn-more"><span>Load more products</span><i class="icon-long-arrow-down"></i></a>
             </div><!-- End .more-container -->
@@ -1228,17 +1206,10 @@
 
 <script>
 export default {
-    props: ['brands','trendy_products'],
-    data() {
-        return {
-            originalWidth: 100,
-            originalHeight: 100,
-            increasedWidth: 120,
-            increasedHeight: 120,
-        };
-    },
+    props: ['brands', 'trendy','category'],
+
     methods: {
-       
+
     }
 
 }

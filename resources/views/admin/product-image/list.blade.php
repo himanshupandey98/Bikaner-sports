@@ -11,8 +11,8 @@
                     <!--begin::Title-->
 
 
-                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Product
-                        List</h1>
+                    <h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Product Images
+                        List - {{ $product_name }}</h1>
                     <!--end::Title-->
                     <!--begin::Breadcrumb-->
 
@@ -22,7 +22,7 @@
                 <!--begin::Actions-->
                 <div class="d-flex align-items-center gap-2 gap-lg-3">
 
-                    <a href="{{ url('product/create') }}" class="btn btn-sm fw-bold btn-primary" >Create</a>
+                    <a href="{{ url('product-image/create/'.Crypt::encrypt($product_id)) }}" class="btn btn-sm fw-bold btn-primary" >Create</a>
                     <!--end::Primary button-->
                 </div>
                 <!--end::Actions-->
@@ -82,28 +82,12 @@
                                             <th class="min-w-125px sorting" tabindex="0"
                                                 aria-controls="kt_table_users" rowspan="1" colspan="1"
                                                 aria-label="User: activate to sort column ascending"
-                                                style="width: 218.375px;">Sno
-                                            </th>
+                                                style="width: 218.375px;">Sno</th>
+                                         
                                             <th class="min-w-125px sorting" tabindex="0"
                                                 aria-controls="kt_table_users" rowspan="1" colspan="1"
                                                 aria-label="User: activate to sort column ascending"
-                                                style="width: 218.375px;">SKU
-                                            </th>
-
-                                            <th class="min-w-125px sorting" tabindex="0"
-                                                aria-controls="kt_table_users" rowspan="1" colspan="1"
-                                                aria-label="User: activate to sort column ascending"
-                                                style="width: 218.375px;">Product Name
-                                            </th>
-
-                                            <th class="min-w-125px sorting" tabindex="0"
-                                                aria-controls="kt_table_users" rowspan="1" colspan="1"
-                                                aria-label="User: activate to sort column ascending"
-                                                style="width: 218.375px;">Product Thumbnail
-                                            </th>
-
-
-                                           
+                                                style="width: 218.375px;">Product Image</th>
                                            
 
                                             <th class="text-end min-w-100px sorting_disabled" rowspan="1"
@@ -115,25 +99,19 @@
                                     <!--end::Table head-->
                                     <!--begin::Table body-->
                                     <tbody class="text-gray-600 fw-semibold">
-                                        @foreach ($products as $item)
+                                        @foreach ($product_images as $item)
                                             <tr>
                                                 <td class="text-start">
                                                     {{ $loop->iteration }}
                                                 </td>
                                                 <td class="text-start">
-                                                    {{ $item->brand->name.'-'.$item->category->name }}
-                                                </td>
-                                                <td class="text-start">
-                                                    {{ $item->name }}
-                                                </td>
-                                                <td class="text-start">
-                                                    <a href="{{ url(Storage::url('product-thumbnail/'.$item->thumbnail)) }}">
-                                                        <img src="{{ url(Storage::url('product-thumbnail/'.$item->thumbnail)) }}" alt="" width="60px">
+                                                    <a href="{{ url(Storage::url('product-image/'.$item->image)) }}">
+                                                       <img src="{{ url(Storage::url('product-image/'.$item->image)) }}" alt="" width="80px">
 
                                                     </a>
                                                     
                                                 </td>
-                                                
+                                               
                                                
                                                 <td class="text-end">
                                                     <a href="#"
@@ -155,22 +133,11 @@
                                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
                                                         data-kt-menu="true">
                                                         <!--begin::Menu item-->
-                                                        <div class="menu-item ">
-                                                            <a href="{{ url('product-image/index/' . Crypt::encrypt($item->id)) }}"
-                                                                class="menu-link ">Product Images</a>
-                                                        </div>
-                                                        <div class="menu-item ">
-                                                            <a href="{{ url('product-variant/index/' . Crypt::encrypt($item->id)) }}"
-                                                                class="menu-link ">Product Variants</a>
-                                                        </div>
-                                                        <div class="menu-item px-3">
-                                                            <a href="{{ url('product/edit/' . Crypt::encrypt($item->id)) }}"
-                                                                class="menu-link px-3">Edit</a>
-                                                        </div>
+                                                      
                                                         <!--end::Menu item-->
                                                         <!--begin::Menu item-->
                                                         <div class="menu-item px-3">
-                                                            <a href="{{ url('product/destroy/' . Crypt::encrypt($item->id)) }}"
+                                                            <a href="{{ url('product-image/destroy/' . Crypt::encrypt($item->id)) }}"
                                                                 class="menu-link px-3"
                                                                 data-kt-users-table-filter="delete_row">Delete</a>
                                                         </div>
