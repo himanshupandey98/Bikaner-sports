@@ -196,8 +196,8 @@
 
                         <div class="product product-11 text-center " v-for="item in trendy" :key="item.id">
                             <figure class="product-media">
-                                <a href="product.html">
-                                    <img :src="item.image" alt="Product image" class="product-image">
+                                <a :href="item.product_url">
+                                    <img :src="item.thumbnail" alt="Product image" class="product-image" style="height:350px">
                                     <img :src="item.thumbnail" alt="Product image" class="product-image-hover">
                                 </a>
 

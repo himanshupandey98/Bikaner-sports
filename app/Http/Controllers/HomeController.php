@@ -32,7 +32,7 @@ class HomeController extends Controller
         }
 
         $productService = new ProductService();
-        $trendy_products = $productService->getProductVariants();
+        $trendy_products = $productService->getProducts();
         $shopByCategory = $productService->shopByCategory();
         
         return view('home',['brands'=>$brands,'trendy_products'=>collect($trendy_products),'shopByCategory'=>collect($shopByCategory)]);

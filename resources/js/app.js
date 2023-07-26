@@ -7,11 +7,7 @@
 import './bootstrap';
 import { createApp } from 'vue';
 
-/**
- * Next, we will create a fresh Vue application instance. You may then begin
- * registering components with the application instance so they are ready
- * to use in your application's views. An example is included for you.
- */
+import store from './store';
 
 const app = createApp({});
 
@@ -20,22 +16,26 @@ app.component('example-component', ExampleComponent);
 
 import Home from './components/Home.vue';
 app.component('home-component', Home);
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
 
-// Object.entries(import.meta.glob('./**/*.vue', { eager: true })).forEach(([path, definition]) => {
-//     app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
-// });
 
-/**
- * Finally, we will attach the application instance to a HTML element with
- * an "id" attribute of "app". This element is included with the "auth"
- * scaffolding. Otherwise, you will need to add an element yourself.
- */
+import ProductDetail from './components/ProductDetail.vue';
+app.component('product-detail', ProductDetail);
+
+import Header from './components/Header.vue';
+app.component('header-component', Header);
+
+import Footer from './components/Footer.vue';
+app.component('footer-component', Footer);
+
+
+import Cart from './components/Cart.vue';
+app.component('cart-component', Cart);
+
+import Checkout from './components/Checkout.vue';
+app.component('checkout-component', Checkout);
+
+
+
+app.use(store);
 
 app.mount('#app');

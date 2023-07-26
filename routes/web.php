@@ -1,16 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\productImageController;
+use App\Http\Controllers\ProductDetailController;
+use App\Http\Controllers\ProductVariantController;
 use App\Http\Controllers\SportsCategoryController;
 use App\Http\Controllers\ProductAttributeController;
-use App\Http\Controllers\ProductVariantController;
 
 Route::get('/',[HomeController::class,'index'])->name('home');
+
+Route::get('/product-detail',[ProductDetailController::class,'ProductDetail']);
 Route::get('/admin', function () {
     return view('admin');
 });
@@ -81,3 +86,13 @@ Route::get('product-variant/edit/{id}', [ProductVariantController::class,'edit']
 Route::post('product-variant/update/{id}', [ProductVariantController::class,'update'])->name('product-variant.update');
 Route::get('product-variant/destroy/{id}', [ProductVariantController::class,'destroy'])->name('product-variant.destroy');
 
+
+Route::post('add-to-cart',[CartController::class,'addToCart'])->name('add-to-cart');
+Route::get('get-cart-items',[CartController::class,'getCartItems'])->name('get-cart-items');
+Route::post('delete-cart-item',[CartController::class,'deleteCartItem'])->name('delete-cart-item');
+Route::post('update-cart-quantity',[CartController::class,'updateCartQuantity'])->name('update-cart-quantity');
+Route::get('show-cart',[CartController::class,'showCart'])->name('show-cart');
+
+
+
+Route::get('checkout-page',[CheckoutController::class,'checkoutPage'])->name('checkout-page');

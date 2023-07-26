@@ -16,4 +16,5 @@ class ProductVariant extends Model
     }
 
     
+    
 }

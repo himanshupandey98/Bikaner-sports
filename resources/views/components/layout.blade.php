@@ -43,12 +43,13 @@
 <body>
     <div class="page-wrapper">
         <div id="app">
-            @include('layouts.header')
+            <header-component></header-component>
+
 
             {{ $slot }}
             <router-view></router-view>
 
-            @include('layouts.footer')
+            <footer-component></footer-component>
 
           
 
