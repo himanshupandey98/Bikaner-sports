@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -95,4 +96,6 @@ Route::get('show-cart',[CartController::class,'showCart'])->name('show-cart');
 
 
 
-Route::get('checkout-page',[CheckoutController::class,'checkoutPage'])->name('checkout-page');
+Route::get('checkout-page',[CheckoutController::class,'checkoutPage']);
+Route::post('razorpay-order',[PaymentController::class,'RazorpayOrder']);
+Route::get('razorpay-payment',[PaymentController::class,'RazorpayPayment']);

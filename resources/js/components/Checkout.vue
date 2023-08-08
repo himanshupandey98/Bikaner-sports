@@ -104,18 +104,14 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr>
-                                                <td><a href="#">Beige knitted elastic runner shoes</a></td>
-                                                <td>$84.00</td>
+                                            <tr v-for="item in cartItems" :key="item.id">
+                                                <td><a href="#">{{item.product_sku}}</a></td>
+                                                <td>{{ 'Rs.'+Number(item.product_qty*item.product_price)+'/-' }}</td>
                                             </tr>
 
-                                            <tr>
-                                                <td><a href="#">Blue utility pinafore denimdress</a></td>
-                                                <td>$76,00</td>
-                                            </tr>
                                             <tr class="summary-subtotal">
                                                 <td>Subtotal:</td>
-                                                <td>$160.00</td>
+                                                <td>{{'Rs.'+total+'/-'}}</td>
                                             </tr><!-- End .summary-subtotal -->
                                             <tr>
                                                 <td>Shipping:</td>
@@ -123,12 +119,26 @@
                                             </tr>
                                             <tr class="summary-total">
                                                 <td>Total:</td>
-                                                <td>$160.00</td>
+                                                <td>{{'Rs.'+total+'/-'}}</td>
                                             </tr><!-- End .summary-total -->
                                         </tbody>
                                     </table><!-- End .table table-summary -->
 
                                     <div class="accordion-summary" id="accordion-payment">
+                                        <div class="card">
+                                            <div class="card-header" id="heading-7">
+                                                <h2 class="card-title">
+                                                    <a role="button" data-toggle="collapse" href="#collapse-7" aria-expanded="true" aria-controls="collapse-7">
+                                                        Razor Pay
+                                                    </a>
+                                                </h2>
+                                            </div><!-- End .card-header -->
+                                            <div id="collapse-7" class="collapse show" aria-labelledby="heading-7" data-parent="#accordion-payment">
+                                                <div class="card-body">
+                                                    Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                                                </div><!-- End .card-body -->
+                                            </div><!-- End .collapse -->
+                                        </div><!-- End .card -->
                                         <div class="card">
                                             <div class="card-header" id="heading-1">
                                                 <h2 class="card-title">
@@ -204,11 +214,11 @@
                                         </div><!-- End .card -->
                                     </div><!-- End .accordion -->
 
-                                    <button type="submit" class="btn btn-outline-primary-2 btn-order btn-block">
-                                        <span class="btn-text">Place Order</span>
-                                        <span class="btn-hover-text">Proceed to Checkout</span>
+                                    <button class="btn btn-outline-primary-2  btn-block" @click.prevent="RazorPay">
+                                        <span class="">Place Order</span>
+
                                     </button>
-                                </div><!-- End .summary -->
+                                </div>
                             </aside><!-- End .col-lg-3 -->
                         </div><!-- End .row -->
                     </form>
@@ -221,7 +231,38 @@
 
 <script>
 export default {
+    mounted() {
+        this.$store.dispatch('setCartItems');
 
+    },
+    computed: {
+        cartItems() {
+            return this.$store.getters.getCartItems;
+        },
+        cartItemsCount() {
+            return this.$store.getters.cartItemsCount;
+        },
+        total() {
+            return this.$store.getters.getTotalPrice;
+        }
+    },
+
+    methods: {
+        RazorPay() {
+            axios.post('/razorpay-order', {
+                    cartItem: this.cartItems,
+                    amount: this.total,
+                })
+                .then((response) => {
+                    // console.log(response);
+                    this.$router.push('/razorpay-payment?order_id=');
+
+                })
+                .catch((error) => {
+
+                });
+        }
+    }
 }
 </script>
 

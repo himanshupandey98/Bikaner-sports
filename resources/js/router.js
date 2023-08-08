@@ -2,13 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 
 
-import Cart from './components/Cart.vue';
+import RazorPay from './components/RazorPay.vue';
 
 const routes = [
   {
-    path: '/cart',
-    component: Cart,
-    name: 'cart',
+    path: '/razorpay-payment',
+    component: RazorPay,
+    name: 'razorpay-payment',
   },
   
 ];
