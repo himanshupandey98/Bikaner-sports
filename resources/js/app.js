@@ -36,6 +36,10 @@ import Checkout from './components/Checkout.vue';
 app.component('checkout-component', Checkout);
 
 
+import CustomerOrder from './components/CustomerOrder.vue';
+app.component('customer-order', CustomerOrder);
+
+
 
 app.use(store);
 app.use(router);

@@ -1,6 +1,6 @@
 <template>
 <div>
-    <main class="main">
+    <main class="main" v-if="isCheckout">
         <div class="page-header text-center" style="background-image: url('assets/images/page-header-bg.jpg')">
             <div class="container">
                 <h1 class="page-title">Checkout<span>Shop</span></h1>
@@ -236,6 +236,9 @@ export default {
 
     },
     computed: {
+        isCheckout() {
+            return this.$route.path === '/checkout-page';
+        },
         cartItems() {
             return this.$store.getters.getCartItems;
         },
@@ -254,8 +257,8 @@ export default {
                     amount: this.total,
                 })
                 .then((response) => {
-                    // console.log(response);
-                    this.$router.push('/razorpay-payment?order_id=');
+                    
+                    this.$router.push('/razorpay-payment?order_id='+response.data.order_id);
 
                 })
                 .catch((error) => {

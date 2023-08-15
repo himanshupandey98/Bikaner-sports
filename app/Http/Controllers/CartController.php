@@ -12,7 +12,7 @@ class CartController extends Controller
     {
         $cart = Cart::with(['variant' => function ($query) {
             $query->select('id', 'image', 'price');
-        }])->get();
+        }])->where('order_id',NULL)->get();
         $data = [];
         foreach ($cart as $key => $item) {
             $data[$key]['id'] = $item['id'];
@@ -20,6 +20,8 @@ class CartController extends Controller
             $data[$key]['product_sku'] = $item['product_sku'];
             $data[$key]['product_price'] = $item['variant']['price'];
             $data[$key]['product_qty'] = $item['product_qty'];
+            $data[$key]['order_id'] = $item['order_id'];
+            
         }
 
         return $data;

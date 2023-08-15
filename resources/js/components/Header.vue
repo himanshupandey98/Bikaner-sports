@@ -146,7 +146,7 @@
                                      
                                  </li>
                                  <li>
-                                     <a href="contact.html" >My Orders</a>
+                                     <a href="/customer-orders" >My Orders</a>
 
                                      
                                  </li>

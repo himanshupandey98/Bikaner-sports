@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -72,6 +73,19 @@ Route::post('product/update/{id}', [ProductController::class,'update'])->name('p
 Route::get('product/destroy/{id}', [ProductController::class,'destroy'])->name('product.destroy');
 
 
+Route::get('customer-orders', [OrderController::class,'customerOrders']);
+Route::get('order/index', [OrderController::class,'index'])->name('order.index');
+Route::get('order/create', [OrderController::class,'create'])->name('order.create');
+Route::post('order/store', [OrderController::class,'store'])->name('order.store');
+Route::get('order/edit/{id}', [OrderController::class,'edit'])->name('order.edit');
+Route::get('order/show/{id}', [OrderController::class,'show'])->name('order.show');
+Route::get('change-order-status', [OrderController::class,'changeOrderStatus']);
+Route::get('fetch-order-status', [OrderController::class,'fetchOrderStatus']);
+
+Route::post('order/update/{id}', [OrderController::class,'update'])->name('order.update');
+Route::get('order/destroy/{id}', [OrderController::class,'destroy'])->name('order.destroy');
+
+
 
 Route::get('product-image/index/{product_id}', [productImageController::class,'index'])->name('product-image.index');
 Route::get('product-image/create/{product_id}', [productImageController::class,'create'])->name('product-image.create');
@@ -99,3 +113,7 @@ Route::get('show-cart',[CartController::class,'showCart'])->name('show-cart');
 Route::get('checkout-page',[CheckoutController::class,'checkoutPage']);
 Route::post('razorpay-order',[PaymentController::class,'RazorpayOrder']);
 Route::get('razorpay-payment',[PaymentController::class,'RazorpayPayment']);
+
+Route::post('get-order-for-payment',[OrderController::class,'getOrderForPayment']);
+Route::post('make-payment',[PaymentController::class,'makePayment']);
+Route::get('invoice',[PaymentController::class,'invoice']);

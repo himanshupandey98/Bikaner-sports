@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 
 import RazorPay from './components/RazorPay.vue';
+import ProductReturn from './components/ProductReturn.vue';
 
 const routes = [
   {
@@ -11,6 +12,7 @@ const routes = [
     name: 'razorpay-payment',
   },
   
+
 ];
 
 const router = createRouter({
