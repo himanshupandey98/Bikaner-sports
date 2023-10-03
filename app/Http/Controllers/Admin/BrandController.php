@@ -23,9 +23,10 @@ class BrandController extends Controller
     }
 
 
-    public function store()
+    public function store(Request $request)
     {
-
+      
+        
         $this->validateData();
 
         request()->image->store('brands/');

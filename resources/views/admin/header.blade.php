@@ -1873,7 +1873,11 @@
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="../../demo1/dist/authentication/layouts/corporate/sign-in.html" class="menu-link px-5">Sign Out</a>
+                            <form action="{{ url('logout') }}" method="post">
+                                @csrf
+                                <button  class="menu-link px-5">Sign Out</button>
+                            
+                            </form>
                         </div>
                         <!--end::Menu item-->
                     </div>

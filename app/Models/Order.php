@@ -21,6 +21,10 @@ class Order extends Model
     const DELIVERED = 2;
     const CANCELLED = 3;
 
+    // order return
+    const RETURNED = 2;
+    const RETURN_REQUESTED = 1;
+
     public function cart()
     {
         return $this->hasMany(Cart::class);

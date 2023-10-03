@@ -1,6 +1,13 @@
 <template>
-<div class="" style="margin:10%">
-    <button id="rzp-button1" @click="pay" class="btn btn-info ">Pay</button>
+<div class="d-flex justify-content-center">
+    <div class="d-block border px-4 py-3 rounded" style="margin:10%">
+        <div>
+
+            <label for="" class="form-label"><b>Amount:</b>{{' Rs.'+(options.amount/100)+'/-'}}</label>
+        </div>
+
+        <button id="rzp-button1" @click="pay" class="btn btn-info ">Pay</button>
+    </div>
 </div>
 </template>
 
@@ -24,7 +31,7 @@ export default {
             }
 
         },
-        loadRazorpayScript() {
+        async loadRazorpayScript() {
             const script = document.createElement('script');
             script.src = 'https://checkout.razorpay.com/v1/checkout.js';
             script.async = true;

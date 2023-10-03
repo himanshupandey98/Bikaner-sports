@@ -56,7 +56,7 @@
                                         <td class="total-col">{{'Rs.'+Number(item.product_price)*Number(item.product_qty)+'/-'}}</td>
                                         <td class="remove-col"><button class="btn-remove" @click="deleteCartItem(item.id)"><i class="icon-close"></i></button></td>
                                     </tr>
-                                    
+
                                 </tbody>
                             </table><!-- End .table table-wishlist -->
 
@@ -100,8 +100,6 @@
                                             <td>Rs.0/-</td>
                                         </tr>
 
-                                      
-
                                         <tr class="summary-shipping-estimate">
                                             <td>Estimate for Your Country<br> <a href="dashboard.html" @click.prevent>Change address</a></td>
                                             <td>&nbsp;</td>
@@ -122,7 +120,7 @@
                     </div>
                 </div><!-- End .container -->
                 <div v-else class="container text-center">
-                         <h4>No items in cart.</h4>
+                    <h4>No items in cart.</h4>
                 </div>
             </div><!-- End .cart -->
         </div><!-- End .page-content -->

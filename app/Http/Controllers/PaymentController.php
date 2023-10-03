@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\service\InvoiceService;
 use App\service\PaymentService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class PaymentController extends Controller
 {
@@ -26,11 +28,7 @@ class PaymentController extends Controller
             $paymentService = new PaymentService();
             $responseData = $paymentService->fetchPaymentStatus(request('razorpay_payment_id'));
 
-            if ($responseData['status'] == 'captured') {
-                $invoiceService = new InvoiceService();
-                $invoice = $invoiceService->createInvoice();
-                return $invoice;
-            }
+         
 
             $order = Order::where('razor_order_id', request('razorpay_order_id'))->first();
             $order->update([
@@ -60,13 +58,13 @@ class PaymentController extends Controller
         try {
             if (request('cartItem')[0]['order_id'] != null) {
 
-                $test_order = order::select('razor_order_id', 'id')->where('id', request('cartItem')[0]['order_id'])->first();
+                $test_order = order::select('razor_order_id', 'order_id')->where('id', request('cartItem')[0]['order_id'])->first();
 
                 return response()->json([
                     'status' => 200,
                     'message' => 'Order Ids are already generated',
                     'razor_order_id' => ($test_order->razor_order_id),
-                    'order_id' => $test_order->id,
+                    'order_id' => $test_order->order_id,
 
                 ]);
             }
@@ -75,11 +73,13 @@ class PaymentController extends Controller
             $order = Order::create([
                 'order_id' => rand(100000, 999999),
                 'amount' => request('amount'),
+                'user_id'=>Auth::id()
             ]);
 
             foreach (request('cartItem') as $key => $value) {
                 Cart::find($value['id'])->update([
                     'order_id' => $order->id,
+                    'product_price'=>$value['product_price'],
                 ]);
             }
 

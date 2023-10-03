@@ -55,6 +55,7 @@
                  <x-menu title="Product Attribute" createurl="product-attribute" listurl="product-attribute"></x-menu>
                  <x-menu title="Product" createurl="product" listurl="product"></x-menu>
                  <x-menu title="Order"  listurl="order"></x-menu>
+                 <x-menu title="Returned Order"  listurl="return-order"></x-menu>
             
              </div>
              <!--end::Menu-->

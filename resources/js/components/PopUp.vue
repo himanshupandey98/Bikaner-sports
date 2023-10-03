@@ -2,7 +2,7 @@
 <div v-if="isVisible" class="popup">
     <div class="popup-content">
         <span>{{ message }}</span>
-        <button @click="hidePopup">Close</button>
+        <button @click="hidePopup" class="mx-2"><i class="icon-close"></i></button>
     </div>
 </div>
 </template>
@@ -35,7 +35,7 @@ export default {
     left: 10;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgb(33 32 32 / 86%);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +47,8 @@ export default {
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    font-size:large;
+    font-family: sans-serif;
 }
 
 .popup-content button {

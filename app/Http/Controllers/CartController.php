@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class CartController extends Controller
@@ -12,7 +13,7 @@ class CartController extends Controller
     {
         $cart = Cart::with(['variant' => function ($query) {
             $query->select('id', 'image', 'price');
-        }])->where('order_id',NULL)->get();
+        }])->where(['order_id'=>NULL,'user_id'=>Auth::id()])->get();
         $data = [];
         foreach ($cart as $key => $item) {
             $data[$key]['id'] = $item['id'];
@@ -32,6 +33,7 @@ class CartController extends Controller
 
     public function showCart()
     {
+        
 
         return view('cart');
     }
@@ -49,6 +51,7 @@ class CartController extends Controller
                 'product_variant_id' => request()->product_variant_id,
                 'product_qty' => request()->quantity,
                 'product_sku' => request()->product_sku,
+                'user_id'=>Auth::id()
             ]);
             return response()->json([
                 'status' => 'success',
@@ -124,4 +127,6 @@ class CartController extends Controller
             ]);
         }
     }
+
+   
 }

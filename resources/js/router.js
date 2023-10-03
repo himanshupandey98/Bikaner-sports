@@ -12,6 +12,12 @@ const routes = [
     name: 'razorpay-payment',
   },
   
+  // {
+  //   path: '/return-product',
+  //   component: ProductReturn,
+  //   name: 'ReturnProduct',
+  // },
+  
 
 ];
 

@@ -9,3 +9,13 @@ function orderStatus()
         3 => 'Cancelled',
     ];
 }
+
+
+function ReturnStatus()
+{
+    return [
+
+        1 => 'Return Requested',
+        2 => 'Returned',
+    ];
+}

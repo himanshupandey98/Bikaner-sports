@@ -39,6 +39,9 @@ app.component('checkout-component', Checkout);
 import CustomerOrder from './components/CustomerOrder.vue';
 app.component('customer-order', CustomerOrder);
 
+import FrontLoginregister from './components/FrontLoginregister.vue';
+app.component('front-loginregister', FrontLoginregister);
+
 
 
 app.use(store);

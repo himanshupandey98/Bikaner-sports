@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
 
 class OrderController extends Controller
@@ -17,24 +18,23 @@ class OrderController extends Controller
                     $query->select('id', 'image', 'price');
                 }]);
             }
-        ])->get();
-       
+        ])->where('user_id', Auth::id())->get();
+
         foreach ($orders as $order) {
-            
+
+            $order['order_status'] = $order->payment_status == 0 ? 'Payment Not Done' : (orderStatus()[$order->order_status]);
             foreach ($order['cart'] as $cart) {
                 $cart->product_image = url('storage/product-variant-image/' . $cart->variant->image);
                 $cart->product_price = $cart->variant->price;
-                
             }
-           
         }
-        
-       
-        return view('order', ['orders' =>$orders]);
+
+
+        return view('order', ['orders' => $orders]);
     }
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::where('return_status', 0)->get();
         return view('admin.order.list', compact('orders'));
     }
 
@@ -77,9 +77,54 @@ class OrderController extends Controller
         return view('admin.order.list', compact('orders'));
     }
 
+    public function CancelOrder()
+    {
+        request()->validate([
+            'order_id' => 'required|exists:orders,id',
+
+        ]);
+        try {
+            $order = Order::find(request('order_id'));
+            $order->delete();
+            return response()->json([
+                'status' => 200,
+                'message' => 'Order Cancelled successfully',
 
 
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 501,
+                'message' => 'Something went wrong !' . $th->getMessage(),
 
+
+            ]);
+        }
+    }
+
+
+    public function ReturnOrderRequest()
+    {
+        request()->validate([
+            'order_id' => 'required|exists:orders,order_id',
+
+        ]);
+        try {
+            $order = Order::where('order_id', request('order_id'))->first();
+            $order->update([
+                'return_status' => Order::RETURN_REQUESTED
+            ]);
+            return response()->json([
+                'status' => 200,
+                'message' => 'Order Return Requested successfully',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 501,
+                'message' => 'Something went wrong !' . $th->getMessage(),
+            ]);
+        }
+    }
 
 
 
@@ -102,7 +147,7 @@ class OrderController extends Controller
     public function getOrderForPayment()
     {
         try {
-            $order = Order::where('id', request('order_id'))->first();
+            $order = Order::where('order_id', request('order_id'))->first();
             return response()->json([
                 'status' => 200,
                 'message' => 'Order fetched successfully',
